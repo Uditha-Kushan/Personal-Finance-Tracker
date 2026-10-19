@@ -1,0 +1,156 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FinTrack | Personal Finance</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <aside class="sidebar">
+    <a class="brand" href="#">Fin<span>Track.</span></a>
+    <p class="nav-label">MENU</p>
+    <a class="nav-link active" href="#dashboard">▦ Dashboard</a>
+    <a class="nav-link" href="#transactions">↕ Transactions</a>
+    <div class="sidebar-bottom">Personal Finance Manager</div>
+  </aside>
+
+  <main class="main-content" id="dashboard">
+    <header class="topbar">
+      <div>
+        <p class="muted">OVERVIEW</p>
+        <h1>Personal Finance</h1>
+        <p class="muted">Track your money. Build better habits.</p>
+      </div>
+      <button class="btn" id="addBtn">+ Add Transaction</button>
+    </header>
+
+    <section class="summary-grid">
+      <article class="summary-card balance-card">
+        <p>Total Balance</p>
+        <h2 id="balance">Rs. 0.00</h2>
+        <span>Income minus expenses</span>
+      </article>
+      <article class="summary-card">
+        <p>Total Income</p>
+        <h2 id="income" class="green">Rs. 0.00</h2>
+        <span>Money received</span>
+      </article>
+      <article class="summary-card">
+        <p>Total Expenses</p>
+        <h2 id="expenses" class="red">Rs. 0.00</h2>
+        <span>Money spent</span>
+      </article>
+    </section>
+
+    <section class="content-grid">
+      <article class="panel">
+        <div class="panel-heading">
+          <div>
+            <h2>Income vs Expenses</h2>
+            <p class="muted">Your overall financial overview</p>
+          </div>
+        </div>
+        <div class="chart" id="chart">
+          <p class="muted">Add transactions to see your chart.</p>
+        </div>
+      </article>
+
+      <article class="panel">
+        <h2>Quick Summary</h2>
+        <p class="muted">Financial overview</p>
+        <div class="summary-line">
+          <span>Transactions</span>
+          <strong id="transactionCount">0</strong>
+        </div>
+        <div class="summary-line">
+          <span>Income share</span>
+          <strong id="incomeShare">0%</strong>
+        </div>
+        <div class="summary-line">
+          <span>Expense share</span>
+          <strong id="expenseShare">0%</strong>
+        </div>
+      </article>
+    </section>
+
+    <section class="panel transactions-panel" id="transactions">
+      <div class="panel-heading">
+        <div>
+          <h2>Recent Transactions</h2>
+          <p class="muted">Review your income and expenses</p>
+        </div>
+        <select id="typeFilter" aria-label="Filter transactions">
+          <option value="all">All transactions</option>
+          <option value="income">Income only</option>
+          <option value="expense">Expenses only</option>
+        </select>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Description</th>
+              <th>Category</th>
+              <th>Date</th>
+              <th>Type</th>
+              <th>Amount</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="transactionList"></tbody>
+        </table>
+      </div>
+      <p id="emptyMessage" class="empty-message">
+        No transactions yet. Add your first transaction.
+      </p>
+    </section>
+
+    <footer>© 2026 FinTrack · Personal Finance Tracker</footer>
+  </main>
+
+  <dialog id="transactionDialog">
+    <form id="transactionForm">
+      <div class="dialog-heading">
+        <h2 id="dialogTitle">Add Transaction</h2>
+        <button type="button" id="closeBtn" class="close-btn">✕</button>
+      </div>
+
+      <label for="description">Description</label>
+      <input id="description" maxlength="100" required
+        placeholder="e.g. Monthly salary">
+
+      <label for="amount">Amount (LKR)</label>
+      <input id="amount" type="number" min="0.01"
+        max="1000000000" step="0.01" required
+        placeholder="e.g. 25000">
+
+      <label for="type">Transaction Type</label>
+      <select id="type" required>
+        <option value="income">Income</option>
+        <option value="expense">Expense</option>
+      </select>
+
+      <label for="category">Category</label>
+      <select id="category" required></select>
+
+      <label for="date">Date</label>
+      <input id="date" type="date" required>
+
+      <p id="formError" class="error-message" role="alert"></p>
+
+      <div class="dialog-actions">
+        <button type="button" id="cancelBtn" class="btn secondary">
+          Cancel
+        </button>
+        <button type="submit" class="btn">Save Transaction</button>
+      </div>
+    </form>
+  </dialog>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
